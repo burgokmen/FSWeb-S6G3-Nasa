@@ -49,22 +49,6 @@ function App() {
       <Greeting date={apodData.date} />
 
       <ApodContainer data={apodData} setDate={setDate} currentDate={date} />
-      <button
-        onClick={() => {
-          setShowImg(!showImg);
-        }}
-      >
-        Hide / Show IMG
-      </button>
-
-      <br />
-      <br />
-      <showHideImg />
-
-      {showImg && <img src={apodData.url} />}
-
-      <br />
-      <br />
 
       <button
         onClick={() => {

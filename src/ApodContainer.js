@@ -9,18 +9,18 @@ export default function Bicomponent(props) {
   if (!data) return <h3>Loading...</h3>;
   return (
     <div>
-      <label htmlFor="apodDate">apodDate:</label>
+      <label htmlFor="apodDate">Change APOD Date:</label>
 
       <input onChange={dataChangeHandler} type="date" name="date" id="date" />
+
+      <p>{data.title}</p>
       {data.media_type === "image" && (
         <img src={data.hdurl} alt={data.title} width="500" height="600" />
       )}
-      <p>{data.service_version}</p>
-      <p>{data.title}</p>
+
       {data.media_type === "video" && (
         <iframe width="420" height="315" src={data.url}></iframe>
       )}
-      <p>{data.explanation}</p>
     </div>
   );
 }
