@@ -1,4 +1,11 @@
 import React from "react";
+import styled from "styled-components";
+
+const WrapperDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  border-style: double;
+`;
 
 export default function Bicomponent(props) {
   const { data, setDate, currentDate } = props;
@@ -13,7 +20,10 @@ export default function Bicomponent(props) {
 
       <input onChange={dataChangeHandler} type="date" name="date" id="date" />
 
-      <p>{data.title}</p>
+      <p>
+        <WrapperDiv>{data.title}</WrapperDiv>
+      </p>
+
       {data.media_type === "image" && (
         <img src={data.hdurl} alt={data.title} width="500" height="600" />
       )}

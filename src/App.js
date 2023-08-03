@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import Greeting from "./Greetings";
 import ApodContainer from "./ApodContainer";
+import styled from "styled-components";
 
 /* const sahteData = {
   date: "1997-01-21",
@@ -25,6 +26,20 @@ function App() {
     console.log("Use Effect Kullanıldı");
   }, [showExplanation, showImg]);
  */
+  const Button = styled.button`
+    padding: 6px 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 3px;
+    color: white;
+
+    ${(props) => (props.type === "primary" ? `background: #2196f3;` : null)}
+  `;
+  const WrapperDiv = styled.div`
+    width: 100%;
+    height: 100%;
+    border-style: double;
+  `;
 
   useEffect(() => {
     axios
@@ -50,18 +65,23 @@ function App() {
 
       <ApodContainer data={apodData} setDate={setDate} currentDate={date} />
 
-      <button
+      <Button
+        type="primary"
         onClick={() => {
           setShowExplantion(!showExplanation);
         }}
       >
         Hide / Show Explanation
-      </button>
+      </Button>
 
       <br />
       <br />
 
-      {showExplanation && <p>{apodData.explanation}</p>}
+      {showExplanation && (
+        <WrapperDiv>
+          <p>{apodData.explanation}</p>
+        </WrapperDiv>
+      )}
     </div>
   );
 }
