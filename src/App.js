@@ -19,9 +19,7 @@ function App() {
   const [apodData, setApodData] = useState("");
   const [showImg, setShowImg] = useState(false);
   const [showExplanation, setShowExplantion] = useState(false);
-  const [datePicker, setDatePicker] = useState(
-    new Date("2022-03-30").toISOString().slice(0, 10)
-  );
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
 
   /*   useEffect(() => {
     console.log("Use Effect Kullanıldı");
@@ -33,7 +31,7 @@ function App() {
       .get("https://api.nasa.gov/planetary/apod", {
         params: {
           api_key: "g2rhKv5VN6rXVDVCewmcMt6UxpjkdYBnllgIrsiF",
-          date: datePicker,
+          date: date,
         },
       })
       .then(function (response) {
@@ -44,17 +42,13 @@ function App() {
         console.log("Nasa Api is not working");
       });
     console.log("Page is rendered.");
-  }, [datePicker]);
+  }, [date]);
 
   return (
     <div className="App">
       <Greeting date={apodData.date} />
 
-      <ApodContainer
-        data={apodData}
-        dateChange={setDatePicker}
-        currentDate={datePicker}
-      />
+      <ApodContainer data={apodData} setDate={setDate} currentDate={date} />
       <button
         onClick={() => {
           setShowImg(!showImg);
