@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import Greeting from "./Greetings";
+import ApodContainer from "./ApodContainer";
 
 /* const sahteData = {
   date: "1997-01-21",
@@ -15,47 +16,45 @@ import Greeting from "./Greetings";
 }; */
 
 function App() {
-  const [data, setData] = useState("");
+  const [apodData, setApodData] = useState("");
   const [showImg, setShowImg] = useState(false);
   const [showExplanation, setShowExplantion] = useState(false);
-  /*  const [datePicker, setDatePicker] = useState(
+  const [datePicker, setDatePicker] = useState(
     new Date("2022-03-30").toISOString().slice(0, 10)
-  ); */
+  );
 
   /*   useEffect(() => {
     console.log("Use Effect Kullanıldı");
   }, [showExplanation, showImg]);
  */
 
-  useEffect(
-    () => {
-      axios
-        .get("https://api.nasa.gov/planetary/apod", {
-          params: {
-            api_key: "g2rhKv5VN6rXVDVCewmcMt6UxpjkdYBnllgIrsiF",
-            /* date: datePicker, */
-          },
-        })
-        .then(function (response) {
-          console.log(response);
-          setData(response.data);
-        })
-        .catch(function (error) {
-          console.log("Nasa Api is not working");
-        });
-      console.log("Page is rendered.");
-    },
-    [
-      /* datePicker */
-    ]
-  );
+  useEffect(() => {
+    axios
+      .get("https://api.nasa.gov/planetary/apod", {
+        params: {
+          api_key: "g2rhKv5VN6rXVDVCewmcMt6UxpjkdYBnllgIrsiF",
+          date: datePicker,
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        setApodData(response.data);
+      })
+      .catch(function (error) {
+        console.log("Nasa Api is not working");
+      });
+    console.log("Page is rendered.");
+  }, [datePicker]);
 
   return (
     <div className="App">
-      <Greeting date={data.date} />
+      <Greeting date={apodData.date} />
 
-      <h1> {data.title} </h1>
-
+      <ApodContainer
+        data={apodData}
+        dateChange={setDatePicker}
+        currentDate={datePicker}
+      />
       <button
         onClick={() => {
           setShowImg(!showImg);
@@ -68,7 +67,7 @@ function App() {
       <br />
       <showHideImg />
 
-      {showImg && <img src={data.url} />}
+      {showImg && <img src={apodData.url} />}
 
       <br />
       <br />
@@ -84,7 +83,7 @@ function App() {
       <br />
       <br />
 
-      {showExplanation && <p>{data.explanation}</p>}
+      {showExplanation && <p>{apodData.explanation}</p>}
     </div>
   );
 }
