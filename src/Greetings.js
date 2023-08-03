@@ -14,7 +14,7 @@ const Greeting = (props) => {
     // console.warn("[ComponentDidUpdate] Greeting componenti yüklendi!");
   });
 
-  return <h1>Bu Fotoğrafın Çekilme Tarihi ... {props.date}</h1>;
+  return <h1>This photo captured on: {props.date}</h1>;
 };
 
 export default Greeting;
