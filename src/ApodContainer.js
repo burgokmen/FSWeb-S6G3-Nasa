@@ -7,6 +7,18 @@ const WrapperDiv = styled.div`
   border-style: double;
 `;
 
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: #bf4f74;
+`;
+
+// Create a Wrapper component that'll render a <section> tag with some styles
+const Wrapper = styled.section`
+  padding: 4em;
+  background: papayawhip;
+`;
+
 export default function Bicomponent(props) {
   const { data, setDate, currentDate } = props;
   function dataChangeHandler(e) {
@@ -20,9 +32,12 @@ export default function Bicomponent(props) {
 
       <input onChange={dataChangeHandler} type="date" name="date" id="date" />
 
-      <p>
-        <WrapperDiv>{data.title}</WrapperDiv>
-      </p>
+      <Title>
+        <p>
+          {" "}
+          <Wrapper>{data.title}</Wrapper>
+        </p>
+      </Title>
 
       {data.media_type === "image" && (
         <img src={data.hdurl} alt={data.title} width="500" height="600" />
